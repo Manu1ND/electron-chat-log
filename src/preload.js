@@ -3,9 +3,8 @@
 
 const { ipcRenderer, contextBridge } = require("electron");
 
-contextBridge.exposeInMainWorld(
-  'electron',
-  {
-    saveContent: (filename, content) => ipcRenderer.send('saveContent', filename, content)
-  }
-)
+contextBridge.exposeInMainWorld('electron', {
+  getBots: (callback) => ipcRenderer.invoke('getBots').then((result) => callback(result)),
+  generateLogs: (botName, fromDate, toDate) => ipcRenderer.send('generateLogs', botName, fromDate, toDate),
+  onUpdateLog: (callback) => ipcRenderer.on('sendProgress', callback)
+});

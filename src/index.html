@@ -2,12 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Hello World!</title>
-
+    <title>Chat Log Downloader!</title>
   </head>
   <body>
     <div id="root"></div>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <h1>💖 Welcome!</h1>
+    <p> by Manjunath Naik</p>
+    <h3 id="logs"></h3>
+    <script>
+      window.electron.onUpdateLog((_event, log) => {
+        document.querySelector('#logs').innerHTML = log;
+      });
+    </script>
   </body>
 </html>
